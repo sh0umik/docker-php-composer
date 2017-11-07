@@ -1,6 +1,6 @@
 FROM php:7.1-alpine
 
-ARG NODE_VERSION=8.7.0
+ARG NODE_VERSION=8.9.0
 
 LABEL php_version=7.1.10
 LABEL node_version=$NODE_VERSION
@@ -8,8 +8,11 @@ LABEL node_version=$NODE_VERSION
 RUN apk add --no-cache \
   bash coreutils tar \
   make gcc g++ python \
-  linux-headers binutils-gold \
-  gnupg nasm libstdc++
+  linux-headers binutils-gold readline readline-dev \
+  gnupg nasm libstdc++ git \
+  alpine-sdk autoconf build-base zlib \
+  zlib-dev libpng libpng-dev libwebp \
+  libwebp-dev libjpeg-turbo libjpeg-turbo-dev
 
 RUN cd /tmp \
   && curl https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}.tar.gz > nodejs-src.tar.gz \
